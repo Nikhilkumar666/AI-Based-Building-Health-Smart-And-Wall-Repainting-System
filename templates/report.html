@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Maintenance Report</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0f0f0f;
+color:white;
+}
+
+.container{
+width:80%;
+margin:auto;
+padding:30px;
+}
+
+h1{
+text-align:center;
+color:#c79b5b;
+}
+
+.card{
+background:#1e1e1e;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.5);
+}
+
+.highlight{color:#4caf50;}
+.warning{color:#ff9800;}
+.danger{color:#f44336;}
+
+/* ✅ NEW ADDITIONS */
+.priority-low{color:#4caf50;}
+.priority-medium{color:#ff9800;}
+.priority-high{color:#f44336;}
+
+.timeline{
+margin-top:20px;
+padding-left:20px;
+border-left:2px solid #c79b5b;
+}
+
+.timeline-item{
+margin-bottom:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏠 AI Building Maintenance Report</h1>
+
+<!-- ✅ NEW: SUMMARY -->
+{% if summary %}
+<div class="card">
+<h2>📊 Report Summary</h2>
+<p>{{summary}}</p>
+</div>
+{% endif %}
+
+{% if damage %}
+<div class="card">
+<h2>🔍 Damage Analysis</h2>
+
+<p><b>Type:</b> {{damage.damage}}</p>
+
+<p><b>Severity:</b>
+<span class="
+{% if damage.severity == 'Low' %}highlight
+{% elif damage.severity == 'Medium' %}warning
+{% else %}danger
+{% endif %}
+">
+{{damage.severity}}
+</span>
+</p>
+
+<!-- ✅ NEW: PRIORITY -->
+<p><b>Priority:</b>
+<span class="priority-{{damage.priority|lower}}">
+{{damage.priority}}
+</span>
+</p>
+
+<p><b>Health:</b> {{damage.health}}%</p>
+<p><b>Confidence:</b> {{damage.confidence}}%</p>
+<p><b>Issues:</b> {{damage.issues}}</p>
+
+<!-- ✅ NEW: AI EXPLANATION -->
+<p><b>AI Explanation:</b> {{damage.explanation}}</p>
+
+<img src="{{ url_for('static', filename=damage.image) }}" width="300">
+
+<!-- ✅ NEW: ACTIONS -->
+<h3>🛠 Recommended Actions</h3>
+<ul>
+{% for action in damage.actions %}
+<li>{{action}}</li>
+{% endfor %}
+</ul>
+
+</div>
+{% endif %}
+
+{% if paint %}
+<div class="card">
+<h2>🎨 Paint Recommendation</h2>
+<p><b>Primary:</b> {{paint.primary}}</p>
+<p><b>Secondary:</b> {{paint.secondary}}</p>
+<p><b>Accent:</b> {{paint.accent}}</p>
+<p><b>Reason:</b> {{paint.reason}}</p>
+</div>
+{% endif %}
+
+<div class="card">
+<h2>🛠 General Maintenance Suggestions</h2>
+<ul>
+<li>Seal cracks immediately if severity is high</li>
+<li>Apply waterproof coating if damp detected</li>
+<li>Use recommended paint for durability</li>
+<li>Inspect structure every 6 months</li>
+</ul>
+</div>
+
+<!-- ✅ NEW: REPORT HISTORY -->
+{% if history %}
+<div class="card">
+<h2>📜 Report History</h2>
+
+<div class="timeline">
+{% for r in history %}
+<div class="timeline-item">
+<p><b>Time:</b> {{r.time}}</p>
+<p><b>Summary:</b> {{r.summary}}</p>
+<hr>
+</div>
+{% endfor %}
+</div>
+
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>

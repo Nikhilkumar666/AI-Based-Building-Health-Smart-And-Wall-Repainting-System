@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Building Health Report</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f4f4;
+text-align:center;
+padding-top:100px;
+}
+
+.report{
+background:white;
+padding:40px;
+width:420px;
+margin:auto;
+border-radius:10px;
+box-shadow:0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* ✅ NEW STYLES (SAFE ADDITIONS) */
+
+.priority-low{
+color:green;
+font-weight:bold;
+}
+
+.priority-medium{
+color:orange;
+font-weight:bold;
+}
+
+.priority-high{
+color:red;
+font-weight:bold;
+}
+
+.section{
+margin-top:20px;
+text-align:left;
+}
+
+ul{
+text-align:left;
+margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="report">
+
+<h2>Detected Damage Image</h2>
+
+<img src="/static/{{result.image}}" 
+     style="width:300px; border-radius:10px; margin-top:20px;">
+
+<h1>Building Health Report</h1>
+
+<p><b>Damage Type:</b> {{result.damage}}</p>
+
+<p><b>Severity Level:</b> {{result.severity}}</p>
+
+<p><b>Number of Issues:</b> {{result.issues}}</p>
+
+<p><b>Detection Confidence:</b> {{result.confidence}}%</p>
+
+<h2>Building Health: {{result.health}}%</h2>
+
+<!-- ✅ NEW: PRIORITY -->
+<div class="section">
+<p><b>Priority Level:</b> 
+<span class="priority-{{result.priority|lower}}">
+    {{result.priority}}
+</span>
+</p>
+</div>
+
+<!-- ✅ NEW: AI EXPLANATION -->
+<div class="section">
+<h3>AI Analysis</h3>
+<p>{{result.explanation}}</p>
+</div>
+
+<!-- ✅ NEW: SUGGESTION -->
+<div class="section">
+<h3>Suggested Action</h3>
+<p>{{result.suggestion}}</p>
+</div>
+
+<!-- ✅ NEW: MAINTENANCE ACTIONS -->
+<div class="section">
+<h3>Recommended Maintenance Steps</h3>
+<ul>
+{% for action in result.actions %}
+    <li>{{action}}</li>
+{% endfor %}
+</ul>
+</div>
+
+</div>
+
+</body>
+</html>

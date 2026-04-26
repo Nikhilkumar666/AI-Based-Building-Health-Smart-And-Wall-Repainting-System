@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+body{
+height:100vh;
+margin:0;
+
+background-image:url("file:///C:/Users/poorn/Downloads/WhatsApp%20Image%202026-03-17%20at%201.02.14%20AM.jpeg");
+
+background-size:cover;
+background-position:center;
+
+font-family:Arial;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.title{
+margin-top:60px;
+font-size:40px;
+}
+
+.menu{
+margin-top:200px;
+display:flex;
+gap:40px;
+}
+
+button{
+padding:15px 30px;
+font-size:18px;
+background:#d2b48c;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#c49a6c;
+}
+
+/* ✅ NEW ADDITIONS */
+.preview{
+margin-top:40px;
+background:rgba(0,0,0,0.7);
+padding:20px;
+border-radius:10px;
+color:white;
+width:60%;
+text-align:left;
+}
+
+.small{
+font-size:14px;
+color:#ddd;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2 class="title">Dashboard</h2>
+
+<div class="menu">
+
+<a href="/damage">
+<button>Damage Analysis</button>
+</a>
+
+<a href="/paint">
+<button>Paint Suggestion</button>
+</a>
+
+<a href="/generate_report">
+<button>Maintenance Report</button>
+</a>
+
+<a href="/admin">
+<button>Admin Panel</button>
+</a>
+
+</div>
+
+<!-- ✅ NEW: LIVE DAMAGE PREVIEW -->
+{% if damage %}
+<div class="preview">
+<h3>🔍 Latest Damage Analysis</h3>
+
+<p><b>Type:</b> {{damage.damage}}</p>
+<p><b>Severity:</b> {{damage.severity}}</p>
+<p><b>Health:</b> {{damage.health}}%</p>
+<p><b>Priority:</b> {{damage.priority}}</p>
+
+<p class="small">{{damage.explanation}}</p>
+</div>
+{% endif %}
+
+<!-- ✅ NEW: PAINT PREVIEW -->
+{% if paint %}
+<div class="preview">
+<h3>🎨 Latest Paint Suggestion</h3>
+
+<p><b>Primary:</b> {{paint.primary}}</p>
+<p><b>Secondary:</b> {{paint.secondary}}</p>
+<p><b>Accent:</b> {{paint.accent}}</p>
+
+<p class="small">{{paint.reason}}</p>
+</div>
+{% endif %}
+
+<!-- ✅ NEW: REPORT HISTORY PREVIEW -->
+{% if reports %}
+<div class="preview">
+<h3>📜 Recent Reports</h3>
+
+{% for r in reports[-3:] %}
+<p><b>{{r.time}}</b> → {{r.summary}}</p>
+{% endfor %}
+
+</div>
+{% endif %}
+
+</body>
+</html>

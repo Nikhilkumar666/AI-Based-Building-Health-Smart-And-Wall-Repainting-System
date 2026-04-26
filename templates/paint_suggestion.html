@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>AI Wall Repaint</title>
+
+<style>
+body{
+font-family:Arial;
+background:#111;
+color:white;
+text-align:center;
+padding:40px;
+}
+
+.container{
+background:#1e1e1e;
+padding:30px;
+border-radius:10px;
+width:80%;
+margin:auto;
+}
+
+img{
+border-radius:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎨 AI Wall Repainting</h1>
+
+{% if colors %}
+
+<h2>Before vs After</h2>
+
+<div style="display:flex; justify-content:center; gap:30px;">
+
+<div>
+<h3>Before</h3>
+<img src="/static/uploads/{{original}}" width="300">
+</div>
+
+<div>
+<h3>After (AI Repaint)</h3>
+<img src="/static/{{painted}}" width="300">
+</div>
+
+</div>
+
+<p>{{colors.reason}}</p>
+
+{% else %}
+
+<h3>Upload image to repaint walls</h3>
+
+<form action="/paint_analysis" method="POST" enctype="multipart/form-data">
+<input type="file" name="file" required>
+<br><br>
+<button type="submit">Repaint</button>
+</form>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>

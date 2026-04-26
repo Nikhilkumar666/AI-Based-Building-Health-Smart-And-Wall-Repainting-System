@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+body{
+margin:0;
+padding:0;
+height:100vh;
+
+background-image: url("file:///C:/Users/poorn/Downloads/WhatsApp%20Image%202026-03-17%20at%201.04.38%20AM%20(1).jpeg");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-family:Arial;
+}
+
+.login-card{
+width:320px;
+padding:35px;
+
+background:rgba(255,255,255,0.2);
+backdrop-filter:blur(10px);
+
+border-radius:15px;
+text-align:center;
+
+box-shadow:0px 0px 15px rgba(0,0,0,0.3);
+}
+
+.login-card input{
+width:90%;
+padding:10px;
+margin:10px 0;
+
+border:none;
+border-radius:6px;
+}
+
+.login-card button{
+padding:10px 20px;
+
+background:#c79b5b;
+border:none;
+
+border-radius:8px;
+font-weight:bold;
+
+cursor:pointer;
+}
+
+.error{
+color:red;
+margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-card">
+
+<h2>Building Advisory System</h2>
+
+<form method="POST">
+
+<input type="text" name="username" placeholder="Username or Email" required>
+
+<input type="password" name="password" placeholder="Password" required>
+
+<br><br>
+
+<button type="submit">LOGIN</button>
+
+</form>
+
+{% if error %}
+<p class="error">{{error}}</p>
+{% endif %}
+
+</div>
+
+</body>
+</html>
